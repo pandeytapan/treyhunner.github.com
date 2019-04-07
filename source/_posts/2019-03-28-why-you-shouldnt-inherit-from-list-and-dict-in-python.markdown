@@ -160,11 +160,11 @@ I'm not an aficionado of object-oriented programming, but the `dict` class seems
 The `list` and `set` classes have similar problems to the `dict` class.
 Let's take a look at an example.
 
-We'll make a custom list that inherits from the `list` constructor and overrides the behavior of `__delitem__`, `__iter__`, and `__eq__`.
+We'll make a custom list that inherits from the `list` constructor and overrides the behaviour of `__delitem__`, `__iter__`, and `__eq__`.
 This list will customize `__delitem__` to not actually *delete* an item but to instead leave a "hole" where that item used to be.
 The `__iter__` and `__eq__` methods will skip over this hole when comparing two `HoleList` classes as "equal".
 
-This class is a bit nonsensical (no it's not a Python Morsels exercise fortunately), but we're focused less on the class itself and more on the issue with inheriting from `list`:
+This class is a bit nonsensical (no it's not a Python Morsels exercise, fortunately), but we're focused less on the class itself and more on the issue with inheriting from `list`:
 
 ```python
 class HoleList(list):
@@ -229,7 +229,7 @@ True
 [1, <object object at 0x7fed214640f0>, 3, <object object at 0x7fed214640f0>]
 ```
 
-Normally in Python 3, overriding `__eq__` would customize the behavior of both equality (`==`) and inequality (`!=`) checks.
+Normally in Python 3, overriding `__eq__` would customize the behaviour of both equality (`==`) and inequality (`!=`) checks.
 But not for `list` or `dict`: they define both `__eq__` and `__ne__` methods which means we need to override both.
 
 ```python
@@ -362,7 +362,7 @@ Unlike `dict`, these `update` and `setdefault` methods will call our `__setitem_
 Abstract base classes might make you think we're leaving the wonderful land of Python duck typing behind for some sort of strongly-typed [OOP][] land.
 But abstract base classes actually enhance duck typing.
 **Inheriting from abstract base classes helps us be better ducks**.
-We don't have to worry about whether we've implemented all the behaviors that make a mutable mapping because the abstract base class will yell at us if we forgot to specify an essential behavior.
+We don't have to worry about whether we've implemented all the behaviours that make a mutable mapping because the abstract base class will yell at us if we forgot to specify an essential behaviour.
 
 The `HoleList` class we made before would need to inherit from the `MutableSequence` abstract base class.
 A custom set-like class would probably inherit from the `MutableSet` abstract base class.
@@ -505,7 +505,7 @@ If you need to change some core functionality, inheriting from `list`, `dict`, o
 If you're making a variation of `list` or `dict` and need to customize just a little bit of core functionality, consider inheriting from `collections.UserList` or `collections.UserDict`.
 
 In general, if you're making something custom, you'll often want to reach for the abstract base classes in `collections.abc`.
-For example if you're making a slightly more custom sequence or mapping (think `collections.deque`, `range`, and maybe `collections.Counter`) you'll want `MutableSequnce` or `MutableMapping`.
+For example, if you're making a slightly more custom sequence or mapping (think `collections.deque`, `range`, and maybe `collections.Counter`) you'll want `MutableSequnce` or `MutableMapping`.
 And if you're making a custom set-like object, your only options are `collections.abc.Set` or `collections.abc.MutableSet` (there is no `UserSet`).
 
 We don't need to create our own data structures very often in Python.
